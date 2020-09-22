@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+}
+
+table {
+  margin: 0 auto;
+}
+
+td {
+  width: 6.5px;
+  height: 6.5px;
+  border: 1px solid black;
+}
+
+.alive {
+  background-color: black;
+}
+
+.dead {
+  background-color: white;
+}
+
+#numberinput {
+  width: 50px;
+}
