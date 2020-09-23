@@ -15,6 +15,24 @@ const newBoardRender = () => {
   return grid;
 };
 
+const randoBoard = () => {
+  const grid = []
+  for(let r = 0; r < rows; r++) {
+    grid[r] = [];
+    for(let c = 0; c < columns; c++) {
+      let num = Math.floor(Math.random() * 10)
+      if(num >= 8) {
+        grid[r][c] = true;
+      }
+      else {
+        grid[r][c] = false;
+
+      }
+    }
+  }
+  return grid;
+};
+
 const Board = ({boardCurrent, toggleCellCurrent }) => {
   const clicky = (r,c) => toggleCellCurrent(r,c);
 
@@ -47,14 +65,18 @@ class App extends React.Component {
   }
 
   randomize = () => {
-    this.clearBoard();
-    for(let r = 0; r < rows; r++) {
-      for(let c = 0; c < columns; c++) {
-        let num = Math.floor(Math.random() * 10)
-        if(num >= 8) {
-          this.toggleCell(r, c)
-        }
-      }
+    if(this.state.isGameRunning === true) {
+      this.stop();
+      this.setState({
+        boardCurrent: randoBoard(),
+        generation: 0
+      });
+    }
+    else {
+      this.setState({
+        boardCurrent: randoBoard(),
+        generation: 0
+      });
     }
   }
 
@@ -206,7 +228,7 @@ class App extends React.Component {
           </div>
           {this.runstopbooton()}
           <button onClick = {this.next}>Next</button>
-          <button onClick = {this.randomize}>Random</button>
+          <button onClick = {this.clearBoard, this.randomize}>Random</button>
           <button onClick = {this.clearBoard}>Reset</button>
           <br/>
             <label>Speed(mb):
