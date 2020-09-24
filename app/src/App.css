@@ -3,8 +3,33 @@
   padding: 0;
 }
 
+html {
+  background-image: url('https://i2.wp.com/www.boingboing.net/images/gameofliffffff.jpg?resize=598%2C276');
+}
+
 .App {
   text-align: center;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.App-header {
+  padding-top: 1%;
+  background-color: white;
+}
+
+.App-header img {
+  width: 35%;
+}
+
+section {
+  background-image: linear-gradient(white, #f2f2f2);
+  padding: 2%;
+  z-index: 1;
+}
+
+section div {
+  margin: 1%;
 }
 
 table {
@@ -27,4 +52,53 @@ td {
 
 #numberinput {
   width: 50px;
+}
+
+hr {
+  margin-top: 30px;
+}
+
+footer {
+  text-align: left;
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer p {
+  font-size: .9em;
+}
+
+.tab {
+  padding-left: 5em;
+}
+
+#Rules {
+  background-color: #4d4d4d;
+  color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform:  translate(-50%, -50%);
+  width: 700px;
+  padding: 3% 3% .5% 3%;
+}
+
+#Rules p {
+  text-align: left;
+  margin: 3%;
+}
+
+.exitButton {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.toggle {
+  z-index: -1;
+}
+
+.noToggle {
+  z-index: 3;
 }

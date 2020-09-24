@@ -1,5 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import logo from './images/bg.png'
 import './App.css';
+import Button from '@material-ui/core/Button'
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import StopIcon from '@material-ui/icons/Stop';
+import SkipNextIcon from '@material-ui/icons/SkipNext';
+import ClearIcon from '@material-ui/icons/Clear';
+import ShuffleIcon from '@material-ui/icons/Shuffle';
+import AssignmentLateIcon from '@material-ui/icons/AssignmentLate';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const rows = 50;
 const columns = 50;
@@ -82,8 +91,18 @@ class App extends React.Component {
 
   runstopbooton = () => {
     return this.state.isGameRunning ?
-    <button type = 'button' onClick = {this.stop}>Stop</button> :
-    <button type = 'button' onClick = {this.run}>Start</button>;
+    <Button
+      className = 'buttons'
+      variant = 'outlined'
+      onClick = {this.stop}
+      startIcon = {<StopIcon />}
+    >Stop</Button> :
+    <Button
+      className = 'buttons'
+      variant = 'outlined'
+      onClick = {this.run}
+      startIcon = {<PlayArrowIcon />}
+    >Start</Button>;
   }
 
   run = () => {
@@ -193,6 +212,18 @@ class App extends React.Component {
     }));
   };
 
+  rulesHHEKCINGOn() {
+    let stupidHECKINGRULES = document.getElementById('Rules')
+    stupidHECKINGRULES.classList.remove('toggle')
+    stupidHECKINGRULES.classList.add('noToggle')
+  }
+
+  rulesHHEKCINGOff() {
+    let stupidHECKINGRULES = document.getElementById('Rules')
+    stupidHECKINGRULES.classList.remove('noToggle')
+    stupidHECKINGRULES.classList.add('toggle')
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const { isGameRunning, speed } = this.state;
     const gameStarted = !prevState.isGameRunning && isGameRunning;
@@ -218,19 +249,54 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <h1>The Game of Life</h1>
-        </header>
+        <div id = "Rules" className = 'toggle'>
+          <h1>RULES:</h1>
+          <hr/>
+          <p>-A living cell must have two or three live neighbors in order to survive</p>
+          <p>-A living cell will die if it has either:</p>
+          <p><span class = 'tab'></span>&#9725; less than two neighbors</p>
+          <p><span class = 'tab'></span>&#9725; four or more neigbors</p>
+          <p>-A cell will be born if it's next to exactly three neighbors</p>
+          <div className = 'exitButton'>
+            <Button
+              size = 'small'
+              startIcon = {<ExitToAppIcon />}
+              color = 'inherit'
+              onClick = {this.rulesHHEKCINGOff}
+            >close</Button>
+          </div>
+        </div>
+        <a href = 'https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life' target = '_blank'>
+          <header className="App-header">
+            <img src = {logo} alt = 'The Game of Life' />
+          </header>
+        </a>
         <section>
           <Board boardCurrent = {boardCurrent} toggleCellCurrent = {this.toggleCell} />
           <div>
             {`Generation: ${generation}`}
           </div>
-          {this.runstopbooton()}
-          <button onClick = {this.next}>Next</button>
-          <button onClick = {this.clearBoard, this.randomize}>Random</button>
-          <button onClick = {this.clearBoard}>Reset</button>
-          <br/>
+          <div>
+            {this.runstopbooton()}
+            <Button
+              className = 'buttons'
+              variant = 'outlined'
+              onClick = {this.next}
+              startIcon = {<SkipNextIcon />}
+            >Next</Button>
+            <Button
+              className = 'buttons' 
+              variant = 'outlined' 
+              onClick = {this.randomize}
+              startIcon = {<ShuffleIcon />}
+            >Random</Button>
+            <Button
+              className = 'buttons'
+              variant = 'outlined' 
+              onClick = {this.clearBoard}
+              startIcon = {<ClearIcon />}
+            >Reset</Button>
+          </div>
             <label>Speed(mb):
               <input
                 id = 'numberinput'
@@ -239,8 +305,15 @@ class App extends React.Component {
                 onChange = {this.onchanwe}
               />
             </label>
+          <hr/>
+          <footer>
+            <p>The Game of Life is a cellular automation created by John Conway.</p>
+            <Button
+              endIcon = {<AssignmentLateIcon />}
+              onClick = {this.rulesHHEKCINGOn}
+            >Rules</Button>
+          </footer>
         </section>
-        <br/>
       </div>
     );
   };
